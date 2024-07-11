@@ -4,7 +4,7 @@
       {% when 'article_title' %}
         <div class="flex center justify-center">
           <div class="max-w-7xl text-center">
-            <a href="{{ blog.url }}" class="text-base uupercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
+            <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
             <h1 class="text-4xl md:text-6xl font-medium" itemprop="headline">{{ article.title }}</h1>
           </div>
         </div>
@@ -136,7 +136,7 @@
       "@type": "Person",
       "name": {{ article.author | json }}
     },
-    "publisher" {
+    "publisher": {
       "@type": "Organization",
       "name": {{ shop.name | json }}
     }
