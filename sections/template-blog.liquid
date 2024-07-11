@@ -1,36 +1,42 @@
 <h1 class="my-12 md:my-32 text-4xl md:text-6xl font-bold text-center">{{ blog.title }}</h1>
-<div class="flex justify-start align-center flex-wrap sm:flex-nowrap gap-[3.33%] max-w-7xl mx-auto px-3">
-  {% paginate blog.articles by section.settings.number_of_blog_posts %}
+{% paginate blog.articles by section.settings.number_of_blog_posts %}
+  <div class="flex justify-start align-center flex-wrap sm:flex-nowrap gap-[3.33%] max-w-7xl mx-auto px-3">
     {% for article in blog.articles %}
-      <a class="w-full sm:max-w-[50%] lg:max-w-[30%] rounded-lg overflow-hidden" href="{{ article.url }}">
-        <div class="h-[300px] overflow-hidden mb-5">
+      <a class="w-full sm:max-w-[50%] lg:max-w-[30%] bg-white rounded-lg overflow-hidden hover:opacity-80 hover:shadow-md transition-all" href="{{ article.url }}">
+        <div class="h-[300px] bg-gray-100 overflow-hidden mb-5">
           {% if article.image %}
             <img class="object-cover h-full" src="{{ article.image | img_url: 'master' }}" width="{{ article.image.width | divided_by: 3 }}" height="{{ article.image.height }}" alt="{{ article.image.alt }}">
           {% else %}
             {{ 'image' | placeholder_svg_tag: 'w-full h-full object-contain' }}
           {% endif %}
         </div>
-  
-        <h2 class="text-2xl font-bold mb-4">{{ article.title | truncatewords: 8 }}</h2>
-  
-        {% if section.settings.display_excerpt %}
-          {% if article.excerpt.size > 0 %}
-          {% else %}
-            <p>{{ article.content | strip_html | truncatewords: 15 }}</p>
+        
+        <div class="p-4">
+          <h2 class="text-xl font-bold mb-4">{{ article.title | truncatewords: 8 }}</h2>
+    
+          {% if section.settings.display_excerpt %}
+            {% if article.excerpt.size > 0 %}
+              <p>{{ article.excerpt | strip_html | truncatewords: 15 }}</p>
+            {% else %}
+              <p>{{ article.content | strip_html | truncatewords: 15 }}</p>
+            {% endif %}
           {% endif %}
-        {% endif %}
-  
-        {% if section.settings.display_post_date %}
-          <small class="inline-block text-gray-400">{{ article.published_at | date: '%Y-%m-%d' }}</small>
-        {% endif %}
-        {% if section.settings.display_author %}
-          <small class="inline-block float-end text-gray-400">{{ article.author }}</small>
-        {% endif %}
-  
+    
+          {% if section.settings.display_post_date %}
+            <small class="inline-block text-gray-400">{{ article.published_at | date: '%Y-%m-%d' }}</small>
+          {% endif %}
+          {% if section.settings.display_author %}
+            <small class="inline-block float-end text-gray-400">{{ article.author }}</small>
+          {% endif %}
+          <span class="block text-end mt-5 text-green-800">Click to see more</span>
+        </div>
       </a>
     {% endfor %}
-  {% endpaginate %}
-</div>
+  </div>
+  <div class="max-w-6xl mx-auto">
+    {% render 'pagination' %}
+  </div>
+{% endpaginate %}
 
 {% schema %}
   {

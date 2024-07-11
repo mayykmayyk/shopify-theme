@@ -56,13 +56,13 @@
               <p class="text-sm">{{ comment.content }}</p>
             </div>
           {% endfor %}
-          {% if paginate.pages > 1 %}
-            {{ paginate | default_pagination }}
-          {% endif %}
+          <div class="max-w-6xl mx-auto">
+            {% render 'pagination' %}
+          </div>
         {% endpaginate %}
       </div>
     {% else %}
-      There are no comments yet!
+      <h2 class="text-lg mb-4 font-medium">There are no comments yet!</h2>
     {% endif %}
   </div>
   <div id="comment_form" class="mb-8">
