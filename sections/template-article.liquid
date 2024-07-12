@@ -57,12 +57,14 @@
             </div>
           {% endfor %}
           <div class="max-w-6xl mx-auto">
-            {% render 'pagination' %}
+            {% render 'pagination', pagination: paginate %}
           </div>
         {% endpaginate %}
       </div>
     {% else %}
+    <div class="flex-1 items-center justify-center mx-auto max-w-4xl px-4">
       <h2 class="text-lg mb-4 font-medium">There are no comments yet!</h2>
+    </div>
     {% endif %}
   </div>
   <div id="comment_form" class="mb-8">
